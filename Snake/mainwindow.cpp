@@ -1,5 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "gamewindow.h"
+#include<QGraphicsScene>
+#include"snake.h"
+#include<QGraphicsView>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,7 +25,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QWidget *game = new QWidget();
-    game->show();
+    /*GameWindow  gamewindow;
+    gamewindow.setModal(true);
+    gamewindow.exec();*/
+
+    //Create a scene
+    QGraphicsScene * scene = new QGraphicsScene;
+
+    //Create snake
+    Snake * snake = new Snake;
+
+    //Add Item To Scene
+    scene->addItem(snake);
+
+    //Make snake focused
+    snake->setFlag(QGraphicsItem::ItemIsFocusable);
+    snake->setFocus();
+
+    //View
+    QGraphicsView * board = new QGraphicsView(scene);
+    board->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    board->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    board->show();
     hide();
 }
