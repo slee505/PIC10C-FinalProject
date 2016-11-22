@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+#include<QGraphicsView>
+#include<QGraphicsScene>
+#include"snake.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +24,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene * scene = new QGraphicsScene(0, 0, 600, 600);
+    QGraphicsView * board = new QGraphicsView(scene);
+    QTimer * timer = new QTimer;
 };
 
 #endif // MAINWINDOW_H

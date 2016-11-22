@@ -4,6 +4,7 @@
 #include<QKeyEvent>
 #include<QTimer>
 #include<QObject>
+#include<string>
 
 
 class Snake : public QObject, public QGraphicsRectItem{
@@ -11,9 +12,16 @@ class Snake : public QObject, public QGraphicsRectItem{
 public:
     Snake();
     void keyPressEvent(QKeyEvent * event);
+    void move();
+    int xPos();
+    int yPos();
 private:
-    QTimer * timer;
+    std::string currentDirection = "right";
+    QTimer * timer = new QTimer;
+    int xPosition;
+    int yPosition;
 public slots:
+    void currentPosition();
     void moveRight();
     void moveLeft();
     void moveUp();
