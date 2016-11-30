@@ -5,7 +5,14 @@
 #include <QTimer>
 #include<QGraphicsView>
 #include<QGraphicsScene>
+#include<QMediaPlayer>
+#include<QBrush>
+#include<QImage>
+#include<QPixmap>
+#include<QPalette>
+#include<QPaintEvent>
 #include"snake.h"
+#include"food.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +24,9 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    QGraphicsScene * scene = new QGraphicsScene(0, 0, 300, 300);
+    QGraphicsView * board = new QGraphicsView(scene);
+    QMediaPlayer * music = new QMediaPlayer();
     ~MainWindow();
 
 private slots:
@@ -24,8 +34,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene * scene = new QGraphicsScene(0, 0, 600, 600);
-    QGraphicsView * board = new QGraphicsView(scene);
     QTimer * timer = new QTimer;
 };
 
