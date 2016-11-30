@@ -1,39 +1,50 @@
-#define MAINWINDOW_H
-
-#include <QMainWindow>
-#include <QTimer>
-#include<QGraphicsView>
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include<QGraphicsScene>
-#include<QMediaPlayer>
-#include<QBrush>
-#include<QImage>
-#include<QPixmap>
-#include<QPalette>
-#include<QPaintEvent>
+#include<QGraphicsView>
 #include"snake.h"
-#include"food.h"
+#include"snakebody.h"
 
-namespace Ui {
-class MainWindow;
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    setWindowTitle("Snek Eater");
+    QPalette * palette = new QPalette();
+    palette->setBrush(QPalette::Window, QPixmap(":/images/Snake.jpg"));
+    this->setPalette(*palette);
+    this->setAutoFillBackground(true);
 }
 
-class MainWindow : public QMainWindow
+MainWindow::~MainWindow()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    QGraphicsScene * scene = new QGraphicsScene(0, 0, 300, 300);
-    QGraphicsView * board = new QGraphicsView(scene);
-    QMediaPlayer * music = new QMediaPlayer();
-    ~MainWindow();
+void MainWindow::on_pushButton_clicked()
+{
+    //Create snake
+    Snake * snake = new Snake;
+    snake->setPos(150,150);
 
-private slots:
-    void on_pushButton_clicked();
+    music->setMedia(QUrl("qrc:/sounds/Metal Gear Solid OST - OST.mp3"));
+    music->play();
 
-private:
-    Ui::MainWindow *ui;
-    QTimer * timer = new QTimer;
-};
+    //Add Item To Scene
+    scene->addItem(snake);
 
-#endif // MAINWINDOW_H
+    //Make snake focused
+    snake->setFlag(QGraphicsItem::ItemIsFocusable);
+    snake->setFocus();
+
+    //View
+    board->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    board->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    board->resize(300,300);
+    board->show();
+
+
+    hide();
+}
