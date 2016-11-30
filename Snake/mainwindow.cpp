@@ -1,41 +1,39 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include<QGraphicsScene>
-#include"snake.h"
+#define MAINWINDOW_H
+
+#include <QMainWindow>
+#include <QTimer>
 #include<QGraphicsView>
+#include<QGraphicsScene>
+#include<QMediaPlayer>
+#include<QBrush>
+#include<QImage>
+#include<QPixmap>
+#include<QPalette>
+#include<QPaintEvent>
+#include"snake.h"
+#include"food.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-    setWindowTitle("Snek");
+namespace Ui {
+class MainWindow;
 }
 
-MainWindow::~MainWindow()
+class MainWindow : public QMainWindow
 {
-    delete ui;
-}
+    Q_OBJECT
 
-void MainWindow::on_pushButton_clicked()
-{
-    //Create snake
-    Snake * snake = new Snake;
-    snake->setPos(300,300);
+public:
+    explicit MainWindow(QWidget *parent = 0);
+    QGraphicsScene * scene = new QGraphicsScene(0, 0, 300, 300);
+    QGraphicsView * board = new QGraphicsView(scene);
+    QMediaPlayer * music = new QMediaPlayer();
+    ~MainWindow();
 
-    //Add Item To Scene
-    scene->addItem(snake);
+private slots:
+    void on_pushButton_clicked();
 
-    //Make snake focused
-    snake->setFlag(QGraphicsItem::ItemIsFocusable);
-    snake->setFocus();
+private:
+    Ui::MainWindow *ui;
+    QTimer * timer = new QTimer;
+};
 
-    //View
-    board->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    board->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    board->resize(600,600);
-    board->show();
-
-
-    hide();
-}
+#endif // MAINWINDOW_H
