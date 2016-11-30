@@ -4,24 +4,32 @@
 #include<QKeyEvent>
 #include<QTimer>
 #include<QObject>
+#include <QList>
 #include<string>
-
+#include<stdlib.h>
+#include "snakebody.h"
+#include"food.h"
+#include"gameover.h"
+#include<QBrush>
 
 class Snake : public QObject, public QGraphicsRectItem{
         Q_OBJECT
 public:
     Snake();
     void keyPressEvent(QKeyEvent * event);
+    void grow();
     void move();
-    int xPos();
-    int yPos();
+    void disconnectAll();
+    void checkForCollision();
+    void WallCollision();
+    void eat();
+    int PrevX;
+    int PrevY;
 private:
+    QList<snakeBody*> body;
     std::string currentDirection = "right";
     QTimer * timer = new QTimer;
-    int xPosition;
-    int yPosition;
 public slots:
-    void currentPosition();
     void moveRight();
     void moveLeft();
     void moveUp();
