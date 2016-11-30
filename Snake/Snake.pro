@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui\
+            multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,8 +14,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    snake.cpp \
+    snakebody.cpp \
+    food.cpp \
+    gameover.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    snake.h \
+    snakebody.h \
+    food.h \
+    gameover.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    gameover.ui
+
+RESOURCES += \
+    resources.qrc
