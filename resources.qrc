@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>Metal Gear Solid OST - OST.mp3</file>
+        <file>GuileTheme.mp3</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>GameOver.jpg</file>
+        <file>Snake.jpg</file>
+    </qresource>
+</RCC>
