@@ -7,6 +7,7 @@ class Food: public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
     Food();
+    //function to add food to game
     void addFood();
 };
 
