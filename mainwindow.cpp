@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("Snake!");
+    //change background
     QPalette * palette = new QPalette();
     palette->setBrush(QPalette::Window, QPixmap(":/images/Snake.jpg"));
     this->setPalette(*palette);
@@ -28,13 +29,16 @@ void MainWindow::on_pushButton_clicked()
     //Create snake
     Snake * snake = new Snake;
     snake->setPos(150,150);
+    
+    //Set background music
     QMediaPlaylist *playlist = new QMediaPlaylist();
     playlist->addMedia(QUrl("qrc:/sounds/GuileTheme.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
 
     music->setPlaylist(playlist);
     music->play();
-
+    
+    //Reset score
     score = new Score();
 
     //Add Item To Scene
