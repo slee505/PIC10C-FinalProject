@@ -3,6 +3,7 @@
 #include "ui_gameover.h"
 #include <QMessageBox>
 
+//global game variable
 extern MainWindow * game;
 
 GameOver::GameOver(QWidget *parent) :
@@ -17,21 +18,25 @@ GameOver::~GameOver()
     delete ui;
 }
 
-void GameOver::on_lineEdit_editingFinished()
-{
-    ui->lineEdit->text();
-}
-
+//Enters player name and leads to leaderboard
 void GameOver::on_pushButton_2_clicked()
 {
+    //open a file of past scores
     QFile scores("scores.txt");
-
+    
+    //check for file being open
     if(!scores.open(QFile::WriteOnly | QFile::Append)){
         QMessageBox::warning(this, "Error", "Something went wrong with the input");
     }
+    
+    //Text stream to input scores
     QTextStream out(&scores);
+    
+    //Input the text entered in the lineEdit
     QString name = ui->lineEdit->text();
     int gameScore = game->score->getScore();
+    
+    //combines score with name and inputs it into file
     out << name << " " << gameScore << "\n";
 
     scores.flush();
