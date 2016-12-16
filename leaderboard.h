@@ -23,6 +23,7 @@ class leaderboard : public QWidget
 public:
     explicit leaderboard(QWidget *parent = 0);
     ~leaderboard();
+    //sort scores in text file for input into leaderboard
     void sortScore();
 
 private slots:
