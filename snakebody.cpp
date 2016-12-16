@@ -1,6 +1,7 @@
 #include "snakebody.h"
 #include "mainwindow.h"
 
+//create snake body and color it black
 snakeBody::snakeBody(QGraphicsItem* Parent)
 {
     setRect(0,0,10,10);
@@ -11,6 +12,7 @@ snakeBody::snakeBody(QGraphicsItem* Parent)
 
 }
 
+//getters for x and y positions of the body
 int snakeBody::xPos()
 {
     return x();
