@@ -18,16 +18,21 @@ SOURCES += main.cpp\
     snake.cpp \
     snakebody.cpp \
     food.cpp \
-    gameover.cpp
+    gameover.cpp \
+    score.cpp \
+    leaderboard.cpp
 
 HEADERS  += mainwindow.h \
     snake.h \
     snakebody.h \
     food.h \
-    gameover.h
+    gameover.h \
+    score.h \
+    leaderboard.h
 
 FORMS    += mainwindow.ui \
-    gameover.ui
+    gameover.ui \
+    leaderboard.ui
 
 RESOURCES += \
     resources.qrc
