@@ -7,16 +7,20 @@ extern Food * food;
 
 Snake::Snake()
 {
+    //define snake head
     setRect(0,0,10,10);
+    //color snake black
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::black);
     setBrush(brush);
-
+    //set snake moving
     move();
+    //set base size to 5
     for(size_t iter = 0; iter < 5; ++iter){
         grow();
     }
+    //put food item on the board
     food = new Food();
     food->setPos(100,100);
     game->scene->addItem(food);
@@ -24,6 +28,7 @@ Snake::Snake()
 
 void Snake::disconnectAll()
 {
+    //disconnect all movement slots in order to prevent compounding movements together
     disconnect(timer, SIGNAL(timeout()), this, SLOT(moveUp()));
     disconnect(timer, SIGNAL(timeout()), this, SLOT(moveDown()));
     disconnect(timer, SIGNAL(timeout()), this, SLOT(moveRight()));
@@ -32,6 +37,7 @@ void Snake::disconnectAll()
 
 void Snake::checkForCollision()
 {
+    //check to see if the head is in the same position with any of the body
     for(snakeBody * b: body){
        if(x() == b->xPos() && y() == b->yPos()){
            disconnectAll();
@@ -43,6 +49,7 @@ void Snake::checkForCollision()
     }
 }
 
+//check to see if snake has hit border of the board
 void Snake::WallCollision()
 {
     if(x() > 300 || x()<0 || y() >300 || y() < 0){
@@ -54,6 +61,7 @@ void Snake::WallCollision()
     }
 }
 
+//makes snake grow when it has reached the same position as a food item
 void Snake::eat()
 {
     if(pos() == food->pos()){
@@ -68,6 +76,7 @@ void Snake::eat()
     }
 }
 
+//changes the direction of the snake when an arrow key is pressed
 void Snake::keyPressEvent(QKeyEvent *event)
 {
     if(event -> key() == Qt::Key_Left){
@@ -96,6 +105,7 @@ void Snake::keyPressEvent(QKeyEvent *event)
     }
 }
 
+//Increases the snake size by 1
 void Snake::grow()
 {
     snakeBody* b = new snakeBody();
@@ -103,6 +113,7 @@ void Snake::grow()
     game->scene->addItem(b);
 }
 
+//connects the appropriate movement slot depending on the previous key press event
 void Snake::move()
 {
     if(currentDirection == "left"){
@@ -126,6 +137,8 @@ void Snake::move()
         timer->start(70);
     }
 }
+
+//directional movement slots
 
 void Snake::moveRight()
 {
