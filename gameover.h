@@ -21,8 +21,7 @@ public:
     ~GameOver();
 
 private slots:
-    void on_lineEdit_editingFinished();
-
+    //function when the enter button is clicked
     void on_pushButton_2_clicked();
 
 private:
